@@ -1,0 +1,492 @@
+page {
+  background: #0a0a0a;
+  color: #fff;
+}
+
+/* 导航栏右侧图标 */
+.nav-right {
+  display: flex;
+  align-items: center;
+  padding-right: 24rpx;
+}
+
+.nav-icon-text {
+  font-size: 36rpx;
+  color: #fff;
+  margin-left: 16rpx;
+  line-height: 1;
+}
+
+/* ========== 滚动容器 ============ */
+.mine-scroll {
+  height: calc(100vh - 180rpx);
+}
+
+/* ========== 未登录状态 ============ */
+.not-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 180rpx);
+  width: 100%;
+  padding: 60rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.logo-wrapper {
+  margin-bottom: 40rpx;
+}
+
+.logo-image {
+  width: 320rpx;
+  height: 320rpx;
+  border-radius: 50%;
+}
+
+.app-name {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 4rpx;
+  margin-bottom: 16rpx;
+}
+
+.login-tip {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 64rpx;
+}
+
+.wx-login-btn {
+  width: 100%;
+  height: 92rpx;
+  line-height: 92rpx;
+  background: linear-gradient(135deg, #ff2a2a, #e60000);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 12rpx;
+  border: none;
+  text-align: center;
+  box-shadow: 0 8rpx 32rpx rgba(255, 42, 42, 0.35);
+  padding: 0;
+  margin: 0;
+}
+
+/* ========== 已登录未绑定 ============ */
+.no-driver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 180rpx);
+  width: 100%;
+  padding: 60rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #1a1a1a;
+  margin-bottom: 32rpx;
+}
+
+.bind-hint {
+  font-size: 24rpx;
+  color: #555;
+  margin-bottom: 40rpx;
+}
+
+.bind-form {
+  width: 100%;
+}
+
+.steam-input {
+  width: 100%;
+  height: 92rpx;
+  border: 2rpx solid #333;
+  border-radius: 12rpx;
+  background: #111;
+  color: #fff;
+  font-size: 28rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  margin-bottom: 24rpx;
+}
+
+.bind-btn {
+  margin-top: 0;
+}
+
+/* 帮助提示区域 */
+.help-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 24rpx;
+}
+
+.help-icon {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #888;
+  background: #1a1a1a;
+  border: 2rpx solid #333;
+  border-radius: 50%;
+}
+
+.tooltip-bubble {
+  position: absolute;
+  top: 56rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520rpx;
+  background: #1a1a1a;
+  border: 2rpx solid #333;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  z-index: 100;
+}
+
+.tooltip-text {
+  font-size: 24rpx;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.tooltip-link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  padding: 16rpx 20rpx;
+  background: #111;
+  border: 2rpx solid #ff2a2a;
+  border-radius: 8rpx;
+}
+
+.tooltip-link {
+  font-size: 22rpx;
+  color: #ff2a2a;
+}
+
+.tooltip-copy {
+  font-size: 22rpx;
+  color: #ff2a2a;
+  font-weight: bold;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: -12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-bottom: 12rpx solid #333;
+}
+
+/* ========== 已绑定车手 — 整体布局 ============ */
+.logged-in {
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* ====== 车手画像区域 ====== */
+.profile-section {
+  /* 无额外padding，由logged-in统一控制 */
+}
+
+/* 头部信息卡 */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #141414;
+  border: 2rpx solid #222;
+  border-radius: 16rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.ph-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.ph-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 2rpx;
+  margin-bottom: 8rpx;
+}
+
+.ph-team {
+  font-size: 26rpx;
+  color: #888;
+  margin-bottom: 6rpx;
+}
+
+.ph-team--none {
+  color: #444;
+}
+
+.ph-nation {
+  font-size: 24rpx;
+  color: #ff2a2a;
+  font-weight: 600;
+  align-self: flex-start;
+  padding: 4rpx 16rpx;
+  background: rgba(255, 42, 42, 0.1);
+  border-radius: 6rpx;
+  border: 1rpx solid rgba(255, 42, 42, 0.3);
+}
+
+.ph-right {
+  display: flex;
+  align-items: center;
+  margin-left: 24rpx;
+}
+
+.license-badge {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 16rpx rgba(255, 42, 42, 0.25);
+}
+
+.license-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 加载中 */
+.profile-loading,
+.race-loading {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.loading-text {
+  font-size: 26rpx;
+  color: #555;
+}
+
+/* 统计卡片网格 (iRacing风格) */
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.stat-card {
+  width: calc((100% - 32rpx) / 3);
+  min-width: 210rpx;
+  background: #141414;
+  border: 2rpx solid #222;
+  border-radius: 14rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.stat-card-head {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 20rpx 10rpx;
+  gap: 8rpx;
+  border-bottom: 2rpx solid #222;
+}
+
+.stat-icon {
+  font-size: 24rpx;
+}
+
+.stat-title {
+  font-size: 22rpx;
+  color: #999;
+  font-weight: 500;
+}
+
+.stat-body {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10rpx 20rpx 14rpx;
+}
+
+.stat-row-label {
+  font-size: 22rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.stat-row-value {
+  font-size: 26rpx;
+  color: #ddd;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-value { color: #17d468; }
+.rank-value { color: #ffcc00; }
+.dt-value { color: #aaa; }
+
+/* 分隔线 */
+.section-divider {
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, #333, transparent);
+  margin: 32rpx 0 24rpx;
+}
+
+/* ====== 比赛记录区域 ====== */
+.races-section {
+  /* 由logged-in的padding控制间距 */
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  padding: 0 8rpx;
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.section-count {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 空状态 */
+.race-empty {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  color: #444;
+}
+
+/* 比赛记录列表 */
+.race-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.race-record-item {
+  background: #141414;
+  border: 2rpx solid #222;
+  border-radius: 14rpx;
+  padding: 22rpx 24rpx;
+  transition: border-color 0.15s;
+}
+
+/* 上部：赛道 + 日期 + 类型标签 */
+.rr-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+
+.rr-track {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rr-meta {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.rr-date {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.rr-tag {
+  font-size: 20rpx;
+  font-weight: 600;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.rr-tag--race {
+  background: rgba(255, 42, 42, 0.15);
+  color: #ff2a2a;
+  border: 1rpx solid rgba(255, 42, 42, 0.35);
+}
+
+.rr-tag--qualify {
+  background: rgba(136, 136, 136, 0.15);
+  color: #888;
+  border: 1rpx solid rgba(136, 136, 136, 0.35);
+}
+
+/* 下部：车型 + 成绩数据 */
+.rr-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rr-car {
+  font-size: 24rpx;
+  color: #888;
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rr-stats {
+  display: flex;
+  gap: 28rpx;
+}
+
+.rr-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rr-stat-label {
+  font-size: 18rpx;
+  color: #555;
+  margin-bottom: 4rpx;
+}
+
+.rr-stat-val {
+  font-size: 24rpx;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pos-val { color: #fff; }
+.lap-val { color: #17d468; }
+.laps-val { color: #aaa; }

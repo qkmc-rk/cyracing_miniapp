@@ -1,0 +1,136 @@
+<!--ranking.wxml-->
+<navigation-bar title="总排名" back="{{true}}" color="#fff" background="#000"></navigation-bar>
+<scroll-view class="ranking-page" scroll-y>
+  <!-- Tab 切换 -->
+  <view class="rank-tabs">
+    <text class="rank-tab {{activeTab === '0' ? 'rank-tab--active' : ''}}" data-index="0" bindtap="switchTab">圈速排名</text>
+    <text class="rank-tab {{activeTab === '1' ? 'rank-tab--active' : ''}}" data-index="1" bindtap="switchTab">积分排名</text>
+    <text class="rank-tab {{activeTab === '2' ? 'rank-tab--active' : ''}}" data-index="2" bindtap="switchTab">平均积分</text>
+  </view>
+
+  <!-- ===== Tab0: 圈速排名 ===== -->
+  <view wx:if="{{activeTab === '0'}}">
+    <!-- 赛道选择 -->
+    <view class="track-select" bindtap="onTrackSelectTap">
+      <text class="track-name">{{tracks[selectedTrackIdx].name || '请选择赛道'}}</text>
+      <text class="track-arrow">▼</text>
+    </view>
+
+    <!-- 表头 -->
+    <view class="rank-header">
+      <view class="rank-col rank-col-left">
+        <text>排名</text>
+        <text class="header-divider">车手</text>
+      </view>
+      <view class="rank-col rank-col-right">
+        <text>车型</text>
+        <text>轮胎</text>
+        <text>最快圈速</text>
+      </view>
+    </view>
+
+    <!-- 加载中 -->
+    <view wx:if="{{loadingLapTime}}" class="loading-tip">
+      <text>加载中...</text>
+    </view>
+
+    <!-- 列表 -->
+    <view wx:elif="{{lapTimeRanks.length > 0}}" class="rank-list">
+      <view wx:for="{{lapTimeRanks}}" wx:key="rank" class="rank-item">
+        <view class="rank-left">
+          <text wx:if="{{item.rank === 1}}" class="rank-medal">🥇</text>
+          <text wx:elif="{{item.rank === 2}}" class="rank-medal">🥈</text>
+          <text wx:elif="{{item.rank === 3}}" class="rank-medal">🥉</text>
+          <text wx:else class="rank-num">{{item.rank}}</text>
+          <text class="rank-driver">{{item.driver_name}}</text>
+        </view>
+        <view class="rank-right">
+          <text class="rank-car">{{item.car_model}}</text>
+          <text class="rank-tire">{{item.tyre_type || '--'}}</text>
+          <text class="rank-time {{item.rank <= 3 ? 'rank-time--top' : ''}}">{{item.best_lap_fmt}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空态 -->
+    <view wx:else class="empty-tip">
+      <text>暂无圈速数据</text>
+    </view>
+  </view>
+
+  <!-- ===== Tab1: 积分排名 ===== -->
+  <view wx:if="{{activeTab === '1'}}">
+    <view class="rank-header">
+      <view class="rank-col rank-col-left">
+        <text>排名</text>
+        <text class="header-divider">车手</text>
+      </view>
+      <view class="rank-col rank-col-right">
+        <text>参赛</text>
+        <text>总积分</text>
+      </view>
+    </view>
+
+    <view wx:if="{{loadingPoints}}" class="loading-tip">
+      <text>加载中...</text>
+    </view>
+
+    <view wx:elif="{{pointsRanks.length > 0}}" class="rank-list">
+      <view wx:for="{{pointsRanks}}" wx:key="rank" class="rank-item">
+        <view class="rank-left">
+          <text wx:if="{{item.rank === 1}}" class="rank-medal">🥇</text>
+          <text wx:elif="{{item.rank === 2}}" class="rank-medal">🥈</text>
+          <text wx:elif="{{item.rank === 3}}" class="rank-medal">🥉</text>
+          <text wx:else class="rank-num">{{item.rank}}</text>
+          <text class="rank-driver">{{item.driver_name}}</text>
+        </view>
+        <view class="rank-right">
+          <text class="rank-count">{{item.total_races}}场</text>
+          <text class="rank-score {{item.rank <= 3 ? 'rank-score--top' : ''}}">{{item.ladder_score}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-tip">
+      <text>暂无积分数据</text>
+    </view>
+  </view>
+
+  <!-- ===== Tab2: 平均积分 ===== -->
+  <view wx:if="{{activeTab === '2'}}">
+    <view class="rank-header">
+      <view class="rank-col rank-col-left">
+        <text>排名</text>
+        <text class="header-divider">车手</text>
+      </view>
+      <view class="rank-col rank-col-right">
+        <text>参赛</text>
+        <text>均分</text>
+      </view>
+    </view>
+
+    <view wx:if="{{loadingPoints}}" class="loading-tip">
+      <text>加载中...</text>
+    </view>
+
+    <view wx:elif="{{averageRanks.length > 0}}" class="rank-list">
+      <view wx:for="{{averageRanks}}" wx:key="rank" class="rank-item">
+        <view class="rank-left">
+          <text wx:if="{{item.rank === 1}}" class="rank-medal">🥇</text>
+          <text wx:elif="{{item.rank === 2}}" class="rank-medal">🥈</text>
+          <text wx:elif="{{item.rank === 3}}" class="rank-medal">🥉</text>
+          <text wx:else class="rank-num">{{item.rank}}</text>
+          <text class="rank-driver">{{item.driver_name}}</text>
+        </view>
+        <view class="rank-right">
+          <text class="rank-count">{{item.total_races}}场</text>
+          <text class="rank-score {{item.rank <= 3 ? 'rank-score--top' : ''}}">{{item.avg_score}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else class="empty-tip">
+      <text>暂无数据</text>
+    </view>
+  </view>
+</scroll-view>

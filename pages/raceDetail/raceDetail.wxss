@@ -1,0 +1,558 @@
+page {
+  background: #000;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-page {
+  flex: 1;
+  overflow-y: hidden;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 120rpx);
+}
+
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #555;
+}
+
+/* ========== 比赛信息头卡 ========== */
+.info-card {
+  margin: 20rpx;
+  padding: 28rpx 30rpx;
+  background: #0d0d0d;
+  border: 2rpx solid #333;
+  border-radius: 12rpx;
+}
+
+.info-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+
+.info-track {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.info-tag {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 6rpx;
+  color: #fff;
+}
+
+.tag--race {
+  background: #cc0000;
+}
+
+.tag--quali {
+  background: #444;
+  color: #aaa;
+}
+
+.info-meta {
+  display: flex;
+  gap: 24rpx;
+}
+
+.info-date,
+.info-count {
+  font-size: 24rpx;
+  color: #888;
+}
+
+/* ========== 事件统计 ========== */
+.stats-card {
+  display: flex;
+  margin: 0 20rpx 20rpx;
+  background: #0d0d0d;
+  border: 2rpx solid #333;
+  border-radius: 12rpx;
+  padding: 24rpx 0;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-num {
+  font-size: 36rpx;
+  font-weight: bold;
+  font-family: monospace, sans-serif;
+}
+
+.stat-num--warn {
+  color: #d4a017;
+}
+
+.stat-num--danger {
+  color: #ff4444;
+}
+
+.stat-num--yellow {
+  color: #d4a017;
+}
+
+.stat-num--red {
+  color: #ff0000;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #777;
+}
+
+/* ========== 区块 ========== */
+.section {
+  margin: 0 20rpx 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #fff;
+  padding: 16rpx 0;
+}
+
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 6rpx;
+  height: 24rpx;
+  background: #ff0000;
+  border-radius: 3rpx;
+  margin-right: 12rpx;
+  vertical-align: middle;
+}
+
+/* ========== 排名列表 ========== */
+.rank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 16rpx;
+  font-size: 22rpx;
+  color: #555;
+}
+
+.rh-left,
+.rh-right {
+  display: flex;
+  gap: 12rpx;
+}
+
+.rh-right {
+  gap: 20rpx;
+}
+
+.header-divider::before {
+  content: '';
+  display: inline-block;
+  width: 1rpx;
+  height: 22rpx;
+  background: #444;
+  vertical-align: middle;
+  margin-right: 12rpx;
+}
+
+.rank-list {
+  background: #0d0d0d;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.rank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 16rpx;
+  border-top: 1rpx solid #1a1a1a;
+}
+
+.rank-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  min-width: 200rpx;
+}
+
+.medal {
+  font-size: 30rpx;
+}
+
+.pos-num {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #888;
+  min-width: 48rpx;
+}
+
+.driver-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.rank-right {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  flex-shrink: 0;
+}
+
+.car-name {
+  font-size: 22rpx;
+  color: #999;
+  max-width: 160rpx;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.lap-time {
+  font-size: 24rpx;
+  color: #666;
+  font-family: monospace, sans-serif;
+  white-space: nowrap;
+}
+
+.lap-time--top {
+  color: #ff0000;
+}
+
+.incidents {
+  font-size: 22rpx;
+  color: #555;
+  min-width: 40rpx;
+  text-align: center;
+}
+
+.incidents--warn {
+  color: #d4a017;
+}
+
+/* ========== 事件列表（按车手分组） ========== */
+.evt-driver-list {
+  background: #0d0d0d;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.evt-driver-block {
+  border-top: 1rpx solid #1a1a1a;
+}
+
+.evt-driver-block:first-child {
+  border-top: none;
+}
+
+.evt-driver-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 16rpx;
+}
+
+.evt-driver-left {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.evt-driver-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.evt-mini-tag {
+  font-size: 18rpx;
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.evt-mini--env {
+  background: #8B7500;
+}
+
+.evt-mini--car {
+  background: #992222;
+}
+
+.evt-mini--cut {
+  background: #555;
+}
+
+.evt-driver-right {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  flex-shrink: 0;
+}
+
+.evt-driver-count {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.evt-detail {
+  background: #0a0a0a;
+  padding: 0 16rpx 16rpx;
+}
+
+.evt-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 0;
+  border-top: 1rpx solid #111;
+}
+
+.evt-detail-left {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+  min-width: 0;
+}
+
+.evt-detail-other {
+  font-size: 22rpx;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.evt-detail-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
+  flex-shrink: 0;
+}
+
+.event-type-tag {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.event-type--COLLISION_WITH_ENV {
+  background: #d4a017;
+}
+
+.event-type--COLLISION_WITH_CAR {
+  background: #cc0000;
+}
+
+.event-type--CUT_TRACK {
+  background: #666;
+}
+
+.event-speed {
+  font-size: 22rpx;
+  color: #ff6666;
+  font-family: monospace, sans-serif;
+}
+
+.event-time {
+  font-size: 20rpx;
+  color: #555;
+}
+
+/* ========== 空态 ========== */
+.empty-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80rpx 0;
+  font-size: 26rpx;
+  color: #444;
+}
+
+/* ========== 单圈成绩 ========== */
+.lap-driver-list {
+  background: #0d0d0d;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.lap-driver-block {
+  border-top: 1rpx solid #1a1a1a;
+}
+
+.lap-driver-block:first-child {
+  border-top: none;
+}
+
+.lap-driver-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 16rpx;
+}
+
+.lap-driver-left {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  flex: 1;
+  min-width: 0;
+}
+
+.lap-pos {
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #888;
+  min-width: 44rpx;
+}
+
+.lap-driver-name {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lap-driver-car {
+  font-size: 22rpx;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lap-driver-right {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  flex-shrink: 0;
+}
+
+.lap-driver-count {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.lap-arrow {
+  font-size: 20rpx;
+  color: #666;
+  transition: transform 0.2s;
+}
+
+.lap-arrow--open {
+  transform: rotate(180deg);
+}
+
+.lap-detail {
+  background: #0a0a0a;
+  padding: 0 12rpx 16rpx;
+}
+
+.lap-table-header {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 8rpx;
+  border-bottom: 1rpx solid #1a1a1a;
+}
+
+.lap-th {
+  flex: 1;
+  font-size: 20rpx;
+  color: #555;
+  text-align: center;
+}
+
+.lap-th-num {
+  flex: 0 0 48rpx;
+  text-align: center;
+}
+
+.lap-th-time {
+  flex: 0 0 140rpx;
+  text-align: center;
+}
+
+.lap-th-flag {
+  flex: 0 0 36rpx;
+}
+
+.lap-row {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 8rpx;
+  border-top: 1rpx solid #111;
+}
+
+.lap-row--invalid {
+  opacity: 0.45;
+}
+
+.lap-row--best {
+  background: rgba(255, 0, 0, 0.08);
+}
+
+.lap-td {
+  flex: 1;
+  font-size: 22rpx;
+  color: #aaa;
+  text-align: center;
+  font-family: monospace, sans-serif;
+}
+
+.lap-td-num {
+  flex: 0 0 48rpx;
+  color: #666;
+  font-size: 20rpx;
+}
+
+.lap-td-time {
+  flex: 0 0 140rpx;
+  color: #ddd;
+  font-weight: bold;
+}
+
+.lap-row--best .lap-td-time {
+  color: #ff4444;
+}
+
+.lap-td-flag {
+  flex: 0 0 36rpx;
+  text-align: center;
+}
+
+.invalid-flag {
+  color: #d4a017;
+  font-size: 22rpx;
+}
+
+.best-flag {
+  color: #ff4444;
+  font-size: 22rpx;
+}

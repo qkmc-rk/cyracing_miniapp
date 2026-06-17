@@ -1,0 +1,193 @@
+<!--mine.wxml-->
+<navigation-bar title="个人中心" back="{{true}}" color="#fff" background="#000">
+  <view slot="right" class="nav-right">
+    <text class="nav-icon-text">···</text>
+    <text class="nav-icon-text">⚙</text>
+  </view>
+</navigation-bar>
+
+<scroll-view scroll-y class="mine-scroll">
+
+  <!-- ========== 未登录 ========== -->
+  <view wx:if="{{!isLoggedIn}}" class="not-login">
+    <view class="logo-wrapper">
+      <image class="logo-image" src="/pages/assets/image/logo.jpg" mode="aspectFit"></image>
+    </view>
+    <text class="app-name">超越模拟竞速</text>
+    <text class="login-tip">登录后查看个人比赛数据</text>
+    <button class="wx-login-btn" bindtap="handleWxLogin">微信登录</button>
+  </view>
+
+  <!-- ========== 已登录但未绑定车手 ========== -->
+  <view wx:elif="{{isLoggedIn && !driver}}" class="no-driver">
+    <image class="avatar" src="/pages/assets/icon/mine2.png" mode="aspectFit"></image>
+    <text class="app-name">已登录</text>
+    <text class="login-tip">暂未绑定车手数据</text>
+    <text class="bind-hint">请提供 Steam GUID 完成绑定</text>
+    <view class="bind-form">
+      <input
+        class="steam-input"
+        placeholder="请输入 Steam GUID"
+        placeholder-style="color:#555"
+        value="{{steamGuid}}"
+        bindinput="onSteamInput"
+      />
+      <button
+        class="wx-login-btn bind-btn"
+        bindtap="onBindTap"
+        loading="{{binding}}"
+        disabled="{{binding}}"
+      >绑定车手</button>
+    </view>
+    <view class="help-area">
+      <view class="help-icon" bindtap="onTooltipTap">?</view>
+      <view wx:if="{{showTooltip}}" class="tooltip-bubble">
+        <text class="tooltip-text">访问 SteamID Finder，输入你的Steam个人资料URL或昵称，即可自动解析GUID( 免责申明：注意该网址为三方网址切勿输入个人信息 )</text>
+        <view class="tooltip-link-row" bindtap="onCopySteamIdUrl">
+          <text class="tooltip-link">https://steamid.io/</text>
+          <text class="tooltip-copy">复制</text>
+        </view>
+        <view class="tooltip-arrow"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ========== 已绑定车手：画像 + 比赛记录 ========== -->
+  <view wx:else class="logged-in">
+
+    <!-- ===== 车手画像区域 ===== -->
+    <view class="profile-section">
+      <!-- 头部信息卡 -->
+      <view class="profile-header">
+        <view class="ph-left">
+          <text class="ph-name">{{driver.driver_name}}</text>
+          <text wx:if="{{driver.team_name}}" class="ph-team">{{driver.team_name}}</text>
+          <text wx:else class="ph-team ph-team--none">无车队</text>
+          <text wx:if="{{driver.nation}}" class="ph-nation">{{driver.nation}}</text>
+        </view>
+        <view class="ph-right">
+          <view class="license-badge" style="background-color: {{profile.license_level === 'R' ? '#ff0000' : profile.license_level === 'D' ? '#a05000' : profile.license_level === 'C' ? '#d4a017' : profile.license_level === 'B' ? '#17a0d4' : profile.license_level === 'A' ? '#7b17d4' : '#17d468'}};">
+            <text class="license-text">{{profile.license_level || '?'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 加载中 -->
+      <view wx:if="{{loadingProfile}}" class="profile-loading">
+        <text class="loading-text">加载画像数据…</text>
+      </view>
+
+      <!-- 统计卡片（iRacing风格） -->
+      <view wx:elif="{{profile}}" class="stats-grid">
+        <!-- 总比赛 -->
+        <view class="stat-card">
+          <view class="stat-card-head">
+            <text class="stat-icon">🏁</text>
+            <text class="stat-title">参赛场次</text>
+          </view>
+          <view class="stat-body">
+            <text class="stat-row-label">Races</text>
+            <text class="stat-row-value">{{profile.total_races || 0}}</text>
+          </view>
+          <view class="stat-body">
+            <text class="stat-row-label">Laps</text>
+            <text class="stat-row-value">{{profile.total_laps || 0}}</text>
+          </view>
+        </view>
+
+        <!-- 安全/积分 -->
+        <view class="stat-card">
+          <view class="stat-card-head">
+            <text class="stat-icon">🛡️</text>
+            <text class="stat-title">安全 / 积分</text>
+          </view>
+          <view class="stat-body">
+            <text class="stat-row-label">SR</text>
+            <text class="stat-row-value sr-value">{{profile.safety_score_fmt}}</text>
+          </view>
+          <view class="stat-body">
+            <text class="stat-row-label">Ladder</text>
+            <text class="stat-row-value">{{profile.ladder_score || 0}}</text>
+          </view>
+        </view>
+
+        <!-- 排名 / 驾驶时长 -->
+        <view class="stat-card">
+          <view class="stat-card-head">
+            <text class="stat-icon">⏱️</text>
+            <text class="stat-title">排名 / 时长</text>
+          </view>
+          <view class="stat-body">
+            <text class="stat-row-label">Rank</text>
+            <text class="stat-row-value rank-value">{{profile.rank_display}}</text>
+          </view>
+          <view class="stat-body">
+            <text class="stat-row-label">Drive Time</text>
+            <text class="stat-row-value dt-value">{{profile.drive_time_fmt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 分隔线 -->
+    <view class="section-divider"></view>
+
+    <!-- ===== 比赛记录区域 ===== -->
+    <view class="races-section">
+      <view class="section-header">
+        <text class="section-title">比赛记录</text>
+        <text class="section-count">{{raceRecords.length}} 场</text>
+      </view>
+
+      <!-- 加载中 -->
+      <view wx:if="{{loadingRaces}}" class="race-loading">
+        <text class="loading-text">加载比赛记录…</text>
+      </view>
+
+      <!-- 空状态 -->
+      <view wx:elif="{{raceRecords.length === 0}}" class="race-empty">
+        <text class="empty-text">暂无比赛记录</text>
+      </view>
+
+      <!-- 比赛列表 -->
+      <view wx:else class="race-list">
+        <view
+          wx:for="{{raceRecords}}"
+          wx:key="race_id"
+          class="race-record-item"
+          bindtap="onRaceRecordTap"
+          data-race-id="{{item.race_id}}"
+        >
+          <!-- 上部：赛道 + 日期 + 类型 -->
+          <view class="rr-top">
+            <text class="rr-track">{{item.track_name}}</text>
+            <view class="rr-meta">
+              <text class="rr-date">{{item.date}}</text>
+              <text class="rr-tag rr-tag--{{item.session_type.toLowerCase()}}">{{item.session_label}}</text>
+            </view>
+          </view>
+          <!-- 下部：车型 + 成绩数据 -->
+          <view class="rr-bottom">
+            <text class="rr-car">{{item.car_model}}</text>
+            <view class="rr-stats">
+              <view class="rr-stat">
+                <text class="rr-stat-label">Pos</text>
+                <text class="rr-stat-val pos-val">{{item.position_display}}</text>
+              </view>
+              <view class="rr-stat">
+                <text class="rr-stat-label">Best Lap</text>
+                <text class="rr-stat-val lap-val">{{item.best_lap_fmt}}</text>
+              </view>
+              <view class="rr-stat">
+                <text class="rr-stat-label">Laps</text>
+                <text class="rr-stat-val laps-val">{{item.laps_completed || 0}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</scroll-view>

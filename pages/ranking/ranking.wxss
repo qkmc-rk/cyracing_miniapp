@@ -1,0 +1,202 @@
+page {
+  background: #000;
+  color: #fff;
+}
+
+.ranking-page {
+  height: calc(100vh - 88rpx);
+  box-sizing: border-box;
+}
+
+/* ========== Tab 切换 ========== */
+.rank-tabs {
+  display: flex;
+  padding: 20rpx 30rpx 0;
+  gap: 0;
+}
+
+.rank-tab {
+  font-size: 28rpx;
+  color: #666666;
+  padding: 16rpx 30rpx;
+  position: relative;
+}
+
+.rank-tab--active {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.rank-tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4rpx;
+  background: #ff0000;
+  border-radius: 2rpx;
+}
+
+/* ========== 赛道选择 ========== */
+.track-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24rpx 20rpx 10rpx;
+  padding: 18rpx 24rpx;
+  border: 2rpx solid #333333;
+  border-radius: 8rpx;
+}
+
+.track-select:active {
+  border-color: #ff2a2a;
+}
+
+.track-name {
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.track-arrow {
+  font-size: 20rpx;
+  color: #666666;
+}
+
+/* ========== 表头 ========== */
+.rank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14rpx 20rpx;
+  font-size: 22rpx;
+  color: #555555;
+}
+
+.rank-col-left,
+.rank-col-right {
+  display: flex;
+  gap: 12rpx;
+}
+
+.rank-col-right {
+  gap: 20rpx;
+}
+
+.header-divider::before {
+  content: '';
+  display: inline-block;
+  width: 1rpx;
+  height: 22rpx;
+  background: #444;
+  vertical-align: middle;
+  margin-right: 12rpx;
+}
+
+/* ========== 排名列表 ========== */
+.rank-list {
+  padding: 0 10rpx 40rpx;
+}
+
+.rank-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 16rpx;
+  background: #0d0d0d;
+  border-top: 1rpx solid #1a1a1a;
+}
+
+/* 左侧：排名 + 车手 */
+.rank-left {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  min-width: 200rpx;
+}
+
+.rank-medal {
+  font-size: 32rpx;
+}
+
+.rank-num {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #888888;
+  width: 40rpx;
+  text-align: center;
+}
+
+.rank-driver {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* 右侧：车型 + 轮胎 + 圈速 */
+.rank-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  flex-shrink: 0;
+}
+
+.rank-car {
+  font-size: 22rpx;
+  color: #999999;
+  text-align: right;
+  max-width: 180rpx;
+  line-height: 1.3;
+}
+
+.rank-tire {
+  font-size: 22rpx;
+  color: #777777;
+  white-space: nowrap;
+}
+
+.rank-time {
+  font-size: 26rpx;
+  color: #666666;
+  font-family: monospace, sans-serif;
+  white-space: nowrap;
+}
+
+.rank-time--top {
+  color: #ff0000;
+}
+
+/* ========== 积分/均分列 ========== */
+.rank-count {
+  font-size: 24rpx;
+  color: #777777;
+  white-space: nowrap;
+}
+
+.rank-score {
+  font-size: 28rpx;
+  color: #666666;
+  font-weight: bold;
+  font-family: monospace, sans-serif;
+  white-space: nowrap;
+}
+
+.rank-score--top {
+  color: #ff0000;
+}
+
+/* ========== 加载 & 空态 ========== */
+.loading-tip,
+.empty-tip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120rpx 0;
+  font-size: 26rpx;
+  color: #555;
+}
+
+.empty-tip {
+  color: #444;
+}

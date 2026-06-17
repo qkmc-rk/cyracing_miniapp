@@ -1,0 +1,110 @@
+/* raceList.wxss */
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+.race-list-scroll {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.race-list-page {
+  display: flex;
+  flex-direction: column;
+  padding: 10rpx 20rpx 40rpx;
+  background-color: #000000;
+}
+
+/* 加载 / 空状态 */
+.loading-wrap,
+.empty-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 120rpx 0;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #888;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 比赛卡片 */
+.race-card {
+  background: #0d0d0d;
+  border: 2rpx solid #333;
+  border-radius: 12rpx;
+  padding: 24rpx 24rpx 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.race-card-top {
+  display: flex;
+  align-items: center;
+}
+
+.race-tag {
+  font-size: 22rpx;
+  color: #fff;
+  padding: 2rpx 10rpx;
+  border-radius: 4rpx;
+  margin-right: 14rpx;
+  flex-shrink: 0;
+}
+
+.race-tag--main {
+  background: #cc0000;
+}
+
+.race-tag--quali {
+  background: #444;
+  color: #aaa;
+}
+
+.race-card-track {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+  flex: 1;
+}
+
+.race-card-date {
+  font-size: 24rpx;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.race-card-bottom {
+  margin-top: 8rpx;
+}
+
+.race-card-info {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 加载更多 */
+.loading-more {
+  display: flex;
+  justify-content: center;
+  padding: 30rpx 0;
+}
+
+.no-more {
+  display: flex;
+  justify-content: center;
+  padding: 30rpx 0 60rpx;
+}
+
+.no-more-text {
+  font-size: 24rpx;
+  color: #555;
+}

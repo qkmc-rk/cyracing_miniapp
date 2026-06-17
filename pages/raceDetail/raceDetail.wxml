@@ -1,0 +1,168 @@
+<!--raceDetail.wxml-->
+<navigation-bar title="比赛详情" back="{{true}}" color="#fff" background="#000" extClass="nav-light"></navigation-bar>
+
+<scroll-view class="detail-page" scroll-y type="list">
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+
+    <!-- 比赛信息头卡 -->
+    <view class="info-card">
+      <view class="info-top">
+        <text class="info-track">{{trackName}}</text>
+        <view class="info-tag {{sessionClass}}">{{sessionLabel}}</view>
+      </view>
+      <view class="info-meta">
+        <text class="info-date">{{raceDate}}</text>
+        <text class="info-count">{{entrantsCount}}人参赛</text>
+      </view>
+    </view>
+
+    <!-- 事件统计 -->
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-num stat-num--warn">{{eventStats.collisionEnv}}</text>
+        <text class="stat-label">撞墙</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num stat-num--danger">{{eventStats.collisionCar}}</text>
+        <text class="stat-label">碰撞</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num stat-num--yellow">{{eventStats.cutTrack}}</text>
+        <text class="stat-label">切弯</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num stat-num--red">{{eventStats.totalIncidents}}</text>
+        <text class="stat-label">事故总计</text>
+      </view>
+    </view>
+
+    <!-- 排名列表 -->
+    <view class="section">
+      <view class="section-title">参赛排名</view>
+      <view class="rank-header">
+        <view class="rh-left">
+          <text>Pos</text>
+          <text class="header-divider">车手</text>
+        </view>
+        <view class="rh-right">
+          <text>车型</text>
+          <text>最快圈</text>
+          <text>事故</text>
+        </view>
+      </view>
+
+      <view wx:if="{{entrants.length > 0}}" class="rank-list">
+        <view wx:for="{{entrants}}" wx:key="position" class="rank-row">
+          <view class="rank-left">
+            <text wx:if="{{item.position === 1}}" class="medal">🥇</text>
+            <text wx:elif="{{item.position === 2}}" class="medal">🥈</text>
+            <text wx:elif="{{item.position === 3}}" class="medal">🥉</text>
+            <text wx:else class="pos-num">P{{item.position}}</text>
+            <text class="driver-name">{{item.driver_name}}</text>
+          </view>
+          <view class="rank-right">
+            <text class="car-name">{{item.car_model}}</text>
+            <text class="lap-time {{item.position <= 3 ? 'lap-time--top' : ''}}">{{item.best_lap_fmt}}</text>
+            <text class="incidents {{item.incidents > 0 ? 'incidents--warn' : ''}}">{{item.incidents}}x</text>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty-tip">
+        <text>暂无参赛数据</text>
+      </view>
+    </view>
+
+    <!-- 单圈成绩 -->
+    <view class="section">
+      <view class="section-title">单圈成绩</view>
+
+      <view wx:if="{{lapData.length > 0}}" class="lap-driver-list">
+        <view wx:for="{{lapData}}" wx:key="driver_id" class="lap-driver-block">
+          <view class="lap-driver-header" bindtap="toggleDriverLaps" data-index="{{index}}">
+            <view class="lap-driver-left">
+              <text class="lap-pos">P{{item.final_position}}</text>
+              <text class="lap-driver-name">{{item.driver_name}}</text>
+              <text class="lap-driver-car">{{item.car_model}}</text>
+            </view>
+            <view class="lap-driver-right">
+              <text class="lap-driver-count">{{item.laps_completed}}圈</text>
+              <text class="lap-arrow {{expandedDriver === index ? 'lap-arrow--open' : ''}}">▼</text>
+            </view>
+          </view>
+
+          <view wx:if="{{expandedDriver === index}}" class="lap-detail">
+            <view class="lap-table-header">
+              <text class="lap-th lap-th-num">#</text>
+              <text class="lap-th lap-th-time">圈速</text>
+              <text class="lap-th">S1</text>
+              <text class="lap-th">S2</text>
+              <text class="lap-th">S3</text>
+              <text class="lap-th lap-th-flag"></text>
+            </view>
+            <view wx:for="{{item.laps}}" wx:for-item="lap" wx:key="lap_number" class="lap-row {{lap.is_valid ? '' : 'lap-row--invalid'}} {{index === item.bestLapIdx ? 'lap-row--best' : ''}}">
+              <text class="lap-td lap-td-num">{{lap.lap_number}}</text>
+              <text class="lap-td lap-td-time">{{lap.lap_time_fmt}}</text>
+              <text class="lap-td">{{lap.sector1_fmt}}</text>
+              <text class="lap-td">{{lap.sector2_fmt}}</text>
+              <text class="lap-td">{{lap.sector3_fmt}}</text>
+              <text class="lap-td lap-td-flag">
+                <text wx:if="{{!lap.is_valid}}" class="invalid-flag">✗</text>
+                <text wx:elif="{{index === item.bestLapIdx}}" class="best-flag">★</text>
+              </text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty-tip">
+        <text>暂无单圈数据</text>
+      </view>
+    </view>
+
+    <!-- 事件列表 -->
+    <view class="section">
+      <view class="section-title">比赛事件</view>
+
+      <view wx:if="{{eventGrouped.length > 0}}" class="evt-driver-list">
+        <view wx:for="{{eventGrouped}}" wx:key="driver_name" class="evt-driver-block">
+          <view class="evt-driver-header" bindtap="toggleEventDriver" data-index="{{index}}">
+            <view class="evt-driver-left">
+              <text class="evt-driver-name">{{item.driver_name}}</text>
+              <text wx:if="{{item.collisionEnv > 0}}" class="evt-mini-tag evt-mini--env">撞墙{{item.collisionEnv}}</text>
+              <text wx:if="{{item.collisionCar > 0}}" class="evt-mini-tag evt-mini--car">碰撞{{item.collisionCar}}</text>
+              <text wx:if="{{item.cutTrack > 0}}" class="evt-mini-tag evt-mini--cut">切弯{{item.cutTrack}}</text>
+            </view>
+            <view class="evt-driver-right">
+              <text class="evt-driver-count">{{item.events.length}}次</text>
+              <text class="lap-arrow {{expandedEventDriver === index ? 'lap-arrow--open' : ''}}">▼</text>
+            </view>
+          </view>
+
+          <view wx:if="{{expandedEventDriver === index}}" class="evt-detail">
+            <view wx:for="{{item.events}}" wx:for-item="evt" wx:key="event_id" class="evt-detail-item">
+              <view class="evt-detail-left">
+                <view class="event-type-tag event-type--{{evt.event_type}}">{{evt.event_label}}</view>
+                <text wx:if="{{evt.other_driver_name && evt.other_driver_name !== '--'}}" class="evt-detail-other">→ {{evt.other_driver_name}}</text>
+              </view>
+              <view class="evt-detail-right">
+                <text wx:if="{{evt.impact_speed !== '--'}}" class="event-speed">{{evt.impact_speed}} km/h</text>
+                <text class="event-time">{{evt.created_at}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:else class="empty-tip">
+        <text>暂无事件记录</text>
+      </view>
+    </view>
+  </block>
+</scroll-view>

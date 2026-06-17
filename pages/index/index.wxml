@@ -1,0 +1,104 @@
+<!--index.wxml-->
+<navigation-bar title="超越模拟竞速" back="{{false}}" color="#fff" background="#000"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="video-banner">
+      <video autoplay loop 	show-progress="{{false}}" src="{{videoSrc}}" controls></video>
+      <view class="video-overlay">
+        <text class="video-title">超越模拟竞速</text>
+      </view>
+    </view>
+    <!-- 公告 -->
+    <view class="block">
+      <view class="block-title">公告</view>
+      <view class="block-content">
+        <block wx:if="{{announcements.length > 0}}">
+          <view
+            class="block-item"
+            wx:for="{{announcements}}"
+            wx:key="announcement_id"
+            bindtap="onAnnouncementTap"
+            data-id="{{item.announcement_id}}"
+          >
+            <view class="block-item-title">{{item.title}}</view>
+            <view class="block-item-date">{{item.date}}</view>
+          </view>
+        </block>
+        <block wx:elif="{{loadingAnnouncements}}">
+          <view class="block-item">
+            <text class="race-loading">加载中…</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="block-item">
+            <text class="race-loading">暂无公告</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!-- 最近比赛 -->
+    <view class="block">
+      <view class="block-title race-title">
+        <text class="block-title-text">最近比赛</text>
+        <text class="race-more" bindtap="onRaceMore">查看全部 ></text>
+      </view>
+      <view class="block-content">
+        <block wx:if="{{races.length > 0}}">
+          <view class="race-item" wx:for="{{races}}" wx:key="race_id" bindtap="onRaceTap" data-race-id="{{item.race_id}}">
+            <view class="race-item-top">
+              <view class="race-tag {{item.session_class}}">{{item.session_label}}</view>
+              <view class="race-item-name">{{item.track_name}}</view>
+              <view class="race-item-date">{{item.date}}</view>
+            </view>
+            <view class="race-sub">共{{item.entrants_count}}人参赛</view>
+          </view>
+        </block>
+        <block wx:elif="{{loadingRaces}}">
+          <view class="race-item">
+            <text class="race-loading">加载中…</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="race-item">
+            <text class="race-loading">暂无比赛数据</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!-- 立即比赛按钮 -->
+    <view class="race-btn-wrap">
+      <view class="race-btn" bindtap="onRace">
+        <text class="race-btn-icon">🏎</text>
+        <text>立即比赛</text>
+      </view>
+      <!-- <view class="race-btn-hint">点击配置服务器地址</view> -->
+    </view>
+    <!-- 赛历 -->
+    <view class="block">
+      <view class="block-title">赛历</view>
+      <view class="block-content">
+        <view class="calendar-item">
+          <view class="calendar-item-top">
+            <view class="calendar-track-name">Monza</view>
+            <view class="calendar-tag">排位</view>
+          </view>
+          <view class="calendar-time">6月8日下午08:00</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 公告详情弹窗 -->
+<view class="modal-root" wx:if="{{showModal}}">
+  <view class="modal-mask" bindtap="onCloseModal"></view>
+  <view class="modal-wrap">
+    <view class="modal-header">
+      <text class="modal-title">{{modalTitle}}</text>
+      <view class="modal-close" bindtap="onCloseModal">✕</view>
+    </view>
+    <scroll-view class="modal-body" scroll-y type="list">
+      <text class="modal-text">{{modalContent}}</text>
+    </scroll-view>
+  </view>
+</view>
