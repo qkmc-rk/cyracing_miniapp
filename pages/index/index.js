@@ -120,5 +120,9 @@ Page({
 
   onRaceMore() {
     wx.navigateTo({ url: '/pages/raceList/raceList' })
+  },
+
+  onMods() {
+    wx.navigateTo({ url: '/pages/mods/mods' })
   }
 })

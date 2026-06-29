@@ -1,9 +1,6 @@
 <!--mine.wxml-->
 <navigation-bar title="个人中心" back="{{true}}" color="#fff" background="#000">
-  <view slot="right" class="nav-right">
-    <text class="nav-icon-text">···</text>
-    <text class="nav-icon-text">⚙</text>
-  </view>
+
 </navigation-bar>
 
 <scroll-view scroll-y class="mine-scroll">

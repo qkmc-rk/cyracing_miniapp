@@ -207,6 +207,11 @@ page {
   margin-right: 14rpx;
 }
 
+.race-btn--mod {
+  background: #1a1a2e;
+  border: 2rpx solid #333366;
+}
+
 .race-btn-hint {
   text-align: center;
   font-size: 22rpx;

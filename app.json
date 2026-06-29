@@ -5,7 +5,8 @@
     "pages/mine/mine",
     "pages/raceDetail/raceDetail",
     "pages/raceList/raceList",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/mods/mods"
   ],
   "window": {
     "navigationBarTextStyle": "black",

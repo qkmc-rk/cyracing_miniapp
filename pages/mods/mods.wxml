@@ -1,0 +1,62 @@
+<!--mods.wxml-->
+<navigation-bar title="Mod 下载" back="{{true}}" color="#fff" background="#000" extClass="nav-light"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 说明区块 -->
+    <view class="block">
+      <view class="block-title">Mod 资源</view>
+      <view class="block-content">
+        <view class="intro-text">点击文件复制下载链接，在 PC 浏览器中打开下载。</view>
+      </view>
+    </view>
+
+    <!-- 文件列表 -->
+    <view class="block">
+      <view class="block-title">文件列表</view>
+      <view class="block-content">
+        <block wx:if="{{modFiles.length > 0}}">
+          <view
+            class="file-item"
+            wx:for="{{modFiles}}"
+            wx:key="name"
+            bindtap="onDownloadTap"
+            data-name="{{item.name}}"
+            data-url="{{item.url}}"
+          >
+            <view class="file-info">
+              <view class="file-icon">📦</view>
+              <view class="file-detail">
+                <view class="file-name">{{item.name}}</view>
+                <view class="file-size" wx:if="{{item.size}}">{{item.size}}</view>
+              </view>
+            </view>
+            <view class="file-action">
+              <text class="file-download-btn">复制链接</text>
+            </view>
+          </view>
+        </block>
+        <block wx:elif="{{loading}}">
+          <view class="file-item">
+            <text class="loading-text">加载中…</text>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="file-item">
+            <text class="empty-text">暂无 Mod 文件</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!-- 提示区块 -->
+    <view class="block">
+      <view class="block-title">使用说明</view>
+      <view class="block-content">
+        <view class="tip-item">1. 点击文件复制下载链接</view>
+        <view class="tip-item">2. 在 PC 浏览器中粘贴链接并下载</view>
+        <view class="tip-item">3. 下载的 Mod 文件可用于 Assetto Corsa 游戏</view>
+        <view class="tip-item">4. 如需添加新 Mod，请联系管理员</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

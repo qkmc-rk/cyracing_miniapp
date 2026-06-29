@@ -4,6 +4,8 @@
 
 一款为 Assetto Corsa 赛车模拟器玩家打造的微信小程序，提供赛事管理、排名查看、车手画像等一站式竞速社区体验。
 
+服务端源码： https://github.com/qkmc-rk/cyracing_server
+
 ---
 
 ## ✨ 功能特性

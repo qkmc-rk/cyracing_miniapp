@@ -73,6 +73,13 @@
       </view>
       <!-- <view class="race-btn-hint">点击配置服务器地址</view> -->
     </view>
+    <!-- Mod 下载入口 -->
+    <view class="race-btn-wrap">
+      <view class="race-btn race-btn--mod" bindtap="onMods">
+        <text class="race-btn-icon">📦</text>
+        <text>Mod 下载</text>
+      </view>
+    </view>
     <!-- 赛历 -->
     <view class="block">
       <view class="block-title">赛历</view>
